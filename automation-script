@@ -1,3 +1,5 @@
+// Script last updated February 10, 2025
+
 async function runScenarios() {
   // These data-ids are present on the webpage using the HTML inspector and it is how the script accesses each input field.
   let DATA_IDS = {
