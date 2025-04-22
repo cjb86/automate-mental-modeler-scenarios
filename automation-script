@@ -1,15 +1,5 @@
-// 02/06/2025
-// Does not include Dreissena or Cladocera, only includes White Perch
-// Only WP values are standardized, all other values are not standardized
-// Changed WP values from 0, 0.1, -0.1, ??? to 0, -0.1, -0.2, -0.3
-// Changed Nutrient values from ???, ???, ???, ??? to 0, -0.1, -0.25, -0.4
-// Provided a shortened label for each set of values
-// Now prints a combination label in addition to a label for each set of values in it's own column
-// Warmer Winters being moved to the end of the list of the components is causing a null exception whenever RCP is used...need to add a case to add to the end of the list if it is missing the ending component
-
-
 async function runScenarios() {
-  // CENTRAL BASIN FEATURES
+  // These data-ids are present on the webpage using the HTML inspector and it is how the script accesses each input field.
   let DATA_IDS = {
     NON_WINTER_WARMING: '112881878932',
     PRECIPITATION: '174521164315',
@@ -22,27 +12,14 @@ async function runScenarios() {
     WAE_HARVESTING: '122174299204'
   }
 
-  // WEST BASIN FEATURES
-  /*
-  let DATA_IDS = {
-    NON_WINTER_WARMING: '4',
-    PRECIPITATION: '1',
-    WATER_LEVELS: '0',
-    STORM_EVENTS: '15',
-    ALT_WINDS: '16',
-    WARMER_WINTERS: '17',
-    WAE_HARVESTING: '37',
-    NUTRIENT_ENRICHMENT: '3',
-    WHITE_PERCH: '39',
-    DREISSENA: '11',
-    CLADOCERA: '33'
-  }
-  */
-
+  // These events allow mimicking a user inputting values in the input fields.
   const EVENTS = { INPUT: new Event("input", {bubbles: true, cancelable: false, composed: true}) };
 
+  // Pauses execution of the script for m milliseconds
   const sleep = m => new Promise(r => setTimeout(r, m));
 
+  // Below are all the defined scenarios. When the script is run, every combination of the objects
+  // will be run in succession until all combinations are exhausted.
   let WALLEYE = [
     { short: 'W0', label: 'Walleye_0', inputValues: [{ dataId: DATA_IDS.WAE_HARVESTING, value: '0' }] },
     { short: 'WL', label: 'Walleye_L', inputValues: [{ dataId: DATA_IDS.WAE_HARVESTING, value: '0.1' }] },
